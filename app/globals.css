@@ -3,19 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-iran-sans-regular: "IranSans", sans-serif;
+  --font-iran-sans-bold: "IranSans", sans-serif;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-iran-sans-regular); /* Default to regular */
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  font-family: var(
+    --font-iran-sans-bold
+  ); /* Apply bold font for headings or strong text */
+  font-weight: 700;
+}
+
+/* You can use font-weight 400 for regular text and 700 for bold text */
+p {
+  font-family: var(
+    --font-iran-sans-regular
+  ); /* Regular weight for paragraphs */
+}
+
+strong {
+  font-family: var(--font-iran-sans-bold); /* Bold weight for strong text */
 }

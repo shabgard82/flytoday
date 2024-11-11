@@ -1,15 +1,17 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const iranSansRegular = localFont({
+  src: "./fonts/IRANSansXRegular.ttf", // Path to regular font
+  variable: "--font-iran-sans-regular", // CSS variable for regular
+  weight: "400", // Regular weight (or the weight used for regular text)
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+// Load the bold version of IranSans
+const iranSansBold = localFont({
+  src: "./fonts/IRANSansXBold.ttf", // Path to bold font
+  variable: "--font-iran-sans-bold", // CSS variable for bold
+  weight: "700", // Bold weight (or the weight used for bold text)
 });
 
 export const metadata = {
@@ -21,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${iranSansRegular.variable} ${iranSansBold.variable} antialiased`}
       >
         {children}
       </body>
