@@ -2,9 +2,16 @@
 import Image from "next/image";
 import UseWindowSize from "./useWindowSize";
 import { pricedItineraries } from "../data/db";
+import { useState } from "react";
+import Detail from "./Detail";
 
 export default function FlyCard() {
   const { width } = UseWindowSize();
+  const [openDetail, setOpenDetail] = useState(false);
+
+  const handleDetail = () => {
+    setOpenDetail((openDetail) => !openDetail);
+  };
 
   return (
     <div>
@@ -22,7 +29,7 @@ export default function FlyCard() {
             const formattedFare = totalFare.toLocaleString();
 
             return (
-              <div key={index}>
+              <div key={index} className="px-2">
                 {width <= 768 ? (
                   <div className="mt-20 w-full h-[270px] flex flex-col border-2">
                     <div className="flex flex-row justify-end items-center py-2 px-4">
@@ -167,7 +174,10 @@ export default function FlyCard() {
                     </div>
                     <hr />
                     <div className="flex flex-row justify-between items-center px-5">
-                      <div className="flex flex-row gap-4">
+                      <div
+                        className="flex flex-row gap-4 cursor-pointer"
+                        onClick={handleDetail}
+                      >
                         <Image
                           src={"/assets/polygon-3.webp"}
                           alt="icon"
@@ -178,6 +188,7 @@ export default function FlyCard() {
                           جزییات بیشتر
                         </p>
                       </div>
+
                       <div className="flex flex-row gap-1 py-3">
                         <p className="text-xs text-[#464646] py-1 px-3">
                           تامین‌کننده: پرایس لاین
@@ -196,6 +207,7 @@ export default function FlyCard() {
                         </p>
                       </div>
                     </div>
+                    {openDetail ? <Detail /> : ""}
                   </div>
                 )}
               </div>
