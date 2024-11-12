@@ -1,4 +1,4 @@
-const pricedItineraries = [
+export const pricedItineraries = [
   {
     passportMandatoryType: "Mandatory",
     domesticCountryCode: null,
