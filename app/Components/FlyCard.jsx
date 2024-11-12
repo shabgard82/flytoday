@@ -6,14 +6,6 @@ import { pricedItineraries } from "../data/db";
 export default function FlyCard() {
   const { width } = UseWindowSize();
 
-  const flightDurations = pricedItineraries.map((flight) => {
-    return flight.originDestinationOptions.map((option) => {
-      return option.flightSegments.map((segment) => {
-        const departureTime = new Date(segment.departureDateTime);
-      });
-    });
-  });
-
   return (
     <div>
       {pricedItineraries.map((flight, index) => {
