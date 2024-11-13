@@ -52,53 +52,55 @@ export default function Detail() {
           </div>
 
           <div className="flex flex-col justify-around px-4">
-            <div className="flex gap-10 mb-4">
-              <div className="flex  gap-4">
+            <div className="flex md:flex-row flex-col  md:gap-10 mb-4">
+              <div className="flex  md:gap-4">
                 <p className="text-[14px] font-bold">۱۲:۴۵ تهران(THR) </p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex md:gap-4">
                 <p>12 اردیبهشت 1399 (07 Apr)</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex md:gap-4">
                 <p>Imam Khomeini Intl</p>
               </div>
             </div>
-            <div className="flex gap-10 my-1">
-              <div className="flex  gap-4">
+            <div className="flex md:flex-row flex-col  md:gap-10 my-1">
+              <div className="flex  md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">مدت پرواز</p>
                 <p className="text-[12px]">۳ ساعت و ۴۵ دقیقه</p>
               </div>
-              <div className="flex  gap-4">
+              <div className="flex  md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">نوع پرواز</p>
                 <p className="text-[12px]">سیستمی</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">استرداد</p>
                 <p className="text-[12px] text-[#ff1d23]">غیر قابل استرداد</p>
               </div>
             </div>
 
-            <div className="flex gap-10 my-1">
-              <div className="flex  gap-4">
+            <div className="flex md:flex-row flex-col  md:gap-10 my-1">
+              <div className="flex  md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">نوع هواپیما</p>
                 <p className="text-[12px]">Airbus A320</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">بار مجاز</p>
                 <p className="text-[12px]">۲۰ کیلوگرم</p>
               </div>
             </div>
-            <div className="flex gap-10 my-1">
-              <div className="flex  gap-4">
+
+            <div className="flex md:flex-row flex-col  md:gap-10 my-1">
+              <div className="flex  md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">کلاس پرواز</p>
                 <p className="text-[12px]">اکونومی</p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex md:gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">کلاس نرخی</p>
                 <p className="text-[12px]">A</p>
               </div>
             </div>
-            <div className="flex gap-10 mt-4">
+
+            <div className="flex  md:flex-row flex-col  md:gap-10 mt-4">
               <div className="flex  gap-4">
                 <p className="text-[14px] font-bold"> ۱۲:۴۵ استانبول(IST) </p>
               </div>

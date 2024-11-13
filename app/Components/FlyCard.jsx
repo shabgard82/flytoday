@@ -4,13 +4,19 @@ import UseWindowSize from "./useWindowSize";
 import { pricedItineraries } from "../data/db";
 import { useState } from "react";
 import Detail from "./Detail";
+import Drawer from "./Drawer";
 
 export default function FlyCard() {
   const { width } = UseWindowSize();
   const [openDetail, setOpenDetail] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDetail = () => {
     setOpenDetail((openDetail) => !openDetail);
+  };
+
+  const handleDrawer = () => {
+    setOpenDrawer((openDrawer) => !openDrawer);
   };
 
   return (
@@ -94,7 +100,10 @@ export default function FlyCard() {
                     <hr />
 
                     <div className="flex flex-row items-center justify-around pt-2">
-                      <button className="bg-[#1773dc] text-[#fff] py-[9px] px-[29px] rounded-md">
+                      <button
+                        onClick={handleDrawer}
+                        className="bg-[#1773dc] text-[#fff] py-[9px] px-[29px] rounded-md"
+                      >
                         جزییات و انتخاب
                       </button>
                       <div>
@@ -207,9 +216,12 @@ export default function FlyCard() {
                         </p>
                       </div>
                     </div>
-                    {openDetail ? <Detail /> : ""}
+                    {openDetail ? <Detail /> : null}
                   </div>
                 )}
+                <Drawer isOpen={openDrawer} toggleDrawer={handleDrawer}>
+                  <Detail />
+                </Drawer>
               </div>
             );
           });
