@@ -1,8 +1,11 @@
 import Image from "next/image";
 
-export default function Detail() {
+export default function Detail({ segment, flight, option }) {
   return (
-    <main dir="rtl" className="flex flex-col justify-between px-2 max-w-[894px]">
+    <main
+      dir="rtl"
+      className="flex flex-col justify-between px-2 max-w-[894px]"
+    >
       <div className="flex items-center gap-6 border-b py-0">
         <div className="flex items-center bg-blue-600 py-2 px-4 rounded-[4px] gap-2">
           <Image
