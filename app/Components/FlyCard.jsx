@@ -6,6 +6,7 @@ import UseWindowSize from "./useWindowSize";
 //COMPONENTS
 import Detail from "./Detail";
 import Drawer from "./Drawer";
+import { ArrowDown2, ArrowUp2 } from "iconsax-react";
 
 export default function FlyCard({ segment, flight, option }) {
   const { width } = UseWindowSize();
@@ -26,6 +27,9 @@ export default function FlyCard({ segment, flight, option }) {
 
   const totalFare =
     flight.airItineraryPricingInfo.itinTotalFare.grandTotalWithoutDiscount;
+
+  const isCharter = flight.isCharter;
+  const economy = segment.cabinClassCode === "Y";
 
   const formattedFare = totalFare.toLocaleString();
 
@@ -86,9 +90,11 @@ export default function FlyCard({ segment, flight, option }) {
               <p className="text-xs text-[#464646] py-1 px-3">
                 {segment.seatsRemaining} صندلی خالی
               </p>
-              <p className="text-xs text-[#464646] py-1 px-3">اکونومی</p>
+              <p className="text-xs text-[#464646] py-1 px-3">
+                {economy ? "اکونومی" : "بیزینس"}
+              </p>
               <p className="text-xs text-[#464646] border-2 border-[#f4f4f4] py-1 px-3">
-                چارتر
+                {isCharter ? "چارتر" : "سیستمی"}
               </p>
             </div>
             <hr />
@@ -177,12 +183,11 @@ export default function FlyCard({ segment, flight, option }) {
                 className="flex flex-row gap-4 cursor-pointer"
                 onClick={handleDetail}
               >
-                <Image
-                  src={"/assets/polygon-3.webp"}
-                  alt="icon"
-                  width={20}
-                  height={4}
-                />
+                {openDetail ? (
+                  <ArrowUp2 size="18" color="#ff7913" />
+                ) : (
+                  <ArrowDown2 size="18" color="#ff7913" />
+                )}
                 <p className="text-[#ff7913] text-[12px]">جزییات بیشتر</p>
               </div>
 
@@ -196,9 +201,11 @@ export default function FlyCard({ segment, flight, option }) {
                 <p className="text-xs text-[#464646] py-1 px-3">
                   {segment.seatsRemaining} صندلی خالی
                 </p>
-                <p className="text-xs text-[#464646] py-1 px-3">اکونومی</p>
+                <p className="text-xs text-[#464646] py-1 px-3">
+                  {economy ? "اکونومی" : "بیزینس"}
+                </p>
                 <p className="text-xs text-[#464646] border-2 border-[#f4f4f4] py-1 px-3">
-                  چارتر
+                  {isCharter ? "چارتر" : "سیستمی"}
                 </p>
               </div>
             </div>

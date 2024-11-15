@@ -4,6 +4,7 @@ import { pricedItineraries } from "../data/db";
 //COMPONENTS
 import FlyCard from "./FlyCard";
 import FlySort from "./FlySort";
+import FilterBox from "./FilterBox";
 
 export default function FlyCardList() {
   const [sortedItineraries, setSortedItineraries] = useState(pricedItineraries);
@@ -32,27 +33,28 @@ export default function FlyCardList() {
   };
 
   return (
-    <div>
-      <FlySort
-        handleSortChange={handleSortChange}
-        sortCriteria={sortCriteria}
-      />
-      {sortedItineraries.map((flight) => {
-        return flight.originDestinationOptions.map((option) => {
-          return option.flightSegments.map((segment) => {
-            return (
-              <FlyCard
-                key={segment.flightNumber}
-                segment={segment}
-                flight={flight}
-                option={option}
-                sortedItineraries={sortedItineraries}
-                setSortedItineraries={setSortedItineraries}
-              />
-            );
+    <div className="flex items-center">
+      <div>
+        <FlySort
+          handleSortChange={handleSortChange}
+          sortCriteria={sortCriteria}
+        />
+        {sortedItineraries.map((flight) => {
+          return flight.originDestinationOptions.map((option) => {
+            return option.flightSegments.map((segment) => {
+              return (
+                <FlyCard
+                  key={segment.flightNumber}
+                  segment={segment}
+                  flight={flight}
+                  option={option}
+                />
+              );
+            });
           });
-        });
-      })}
+        })}
+      </div>
+      <FilterBox />
     </div>
   );
 }
