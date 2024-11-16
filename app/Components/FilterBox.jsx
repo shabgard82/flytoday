@@ -23,7 +23,7 @@ export default function FilterBox({ filters, setFilters, handleRemoveFilter }) {
   };
 
   return (
-    <div className="md:w-full md:max-w-[282px] md:border md:justify-start h-auto">
+    <div className="md:w-full md:min-w-[282px] md:border md:justify-start h-auto">
       <div className="flex justify-between items-center px-4 py-4">
         <p
           className="text-[13px] text-[#1773dc] cursor-pointer"

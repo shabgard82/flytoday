@@ -66,7 +66,7 @@ export default function FlyCardList() {
 
   return (
     <div className="flex justify-center gap-10">
-      <div>
+      <div className="flex-2">
         <FlySort
           handleSortChange={handleSortChange}
           sortCriteria={sortCriteria}
@@ -86,11 +86,13 @@ export default function FlyCardList() {
           });
         })}
       </div>
-      <FilterBox
-        filters={filters}
-        setFilters={setFilters}
-        handleRemoveFilter={handleRemoveFilter}
-      />
+      <div className="md:inline-block lg:inline-block flex-2 hidden">
+        <FilterBox
+          filters={filters}
+          setFilters={setFilters}
+          handleRemoveFilter={handleRemoveFilter}
+        />
+      </div>
     </div>
   );
 }
