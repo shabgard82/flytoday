@@ -11,7 +11,7 @@ export default function FlySort({ sortCriteria, handleSortChange }) {
             <option className="pr-8" value="قیمت">
               قیمت
             </option>
-            <option value="زمان پرواز">زمان پرواز</option>
+            <option value="زمان">زمان پرواز</option>
           </select>
           <p className="text-[#8d8d8d] text-[14px] px-2">مرتب سازی :</p>
         </div>

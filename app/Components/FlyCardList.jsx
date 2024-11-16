@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { pricedItineraries } from "../data/db";
-import FlyCard from "./FlyCard";
 import FlySort from "./FlySort";
 import FilterBox from "./FilterBox";
 import NewFlycard from "./NewFlyCard";
@@ -35,7 +34,7 @@ export default function FlyCardList() {
           a.airItineraryPricingInfo.itinTotalFare.totalFare -
           b.airItineraryPricingInfo.itinTotalFare.totalFare
         );
-      } else if (selectedCriteria === "زمان پرواز") {
+      } else if (selectedCriteria === "زمان") {
         return (
           a.originDestinationOptions[0].journeyDurationPerMinute -
           b.originDestinationOptions[0].journeyDurationPerMinute
