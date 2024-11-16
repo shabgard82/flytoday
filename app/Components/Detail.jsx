@@ -1,7 +1,53 @@
-"use client"
+"use client";
 import Image from "next/image";
 
-export default function Detail({ segment, flight, option }) {
+export default function Detail({
+  segment,
+  flight,
+  option,
+  durationInFarsi,
+  formattedArrivalTime,
+  formattedDepartureTime,
+}) {
+  function toPersianDate(date) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      calendar: "persian",
+      numberingSystem: "arab",
+    };
+    return date.toLocaleDateString("fa-IR", options);
+  }
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  function formatDate(date) {
+    const persianDate = toPersianDate(date);
+    const gregorianDate = date.toISOString().split("T")[0];
+    const [year, month, day] = gregorianDate.split("-");
+
+    const monthName = monthNames[parseInt(month, 10) - 1];
+
+    return `${persianDate} (${day} ${monthName} ${year})`;
+  }
+
+  const formattedDeparture = formatDate(new Date(segment.departureDateTime));
+  const formattedArrival = formatDate(new Date(segment.arrivalDateTime));
+
   return (
     <main
       dir="rtl"
@@ -32,14 +78,14 @@ export default function Detail({ segment, flight, option }) {
       </p>
       <div className="flex flex-col">
         <div className="flex items-center">
-          <div className="flex flex-row justify-start items-center py-2 px-4 ">
-            <p className="text-[14px] text-[#464646] px-2">ماهان</p>
+          <div className="flex flex-col justify-start items-center py-2 px-4 ">
             <Image
               src={"/assets/icon.webp"}
               alt="fly-name"
               width={40}
               height={40}
             />
+            <p className="text-[14px] text-[#464646] px-2">ماهان</p>
           </div>
 
           <div className="flex flex-col items-center">
@@ -58,27 +104,33 @@ export default function Detail({ segment, flight, option }) {
           <div className="flex flex-col justify-around px-4">
             <div className="flex md:flex-row flex-col  md:gap-10 mb-4">
               <div className="flex md:gap-4 mb-2 md:mb-0">
-                <p className="text-[14px] font-bold">۱۲:۴۵ تهران(THR) </p>
+                <p className="text-[14px] font-bold">
+                  {formattedDepartureTime} تهران (THR)
+                </p>
               </div>
               <div className="flex md:gap-4 mb-2 md:mb-0">
                 <p className="text-[#464646] text-[14px]">
-                  12 اردیبهشت 1399 (07 Apr)
+                  {formattedDeparture}
                 </p>
               </div>
               <div className="flex md:gap-4">
-                <p className="text-[#8d8d8d] text-[14px]">Imam Khomeini Intl</p>
+                <p className="text-[#8d8d8d] text-[14px]">
+                  {segment.departureAirportLocationCode}
+                </p>
               </div>
             </div>
             <div className="flex md:flex-row flex-col  md:gap-10 md:my-1">
               <div className="flex  gap-4">
                 <p className="text-[12px] text-[#8d8d8d]">مدت پرواز</p>
-                <p className="text-[12px]">۳ ساعت و ۴۵ دقیقه</p>
+                <p className="text-[12px]">{durationInFarsi}</p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
                   نوع پرواز
                 </p>
-                <p className="text-[12px]">سیستمی</p>
+                <p className="text-[12px]">
+                  {flight.isCharter ? "چارتر" : "سیستمی"}
+                </p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
@@ -93,13 +145,15 @@ export default function Detail({ segment, flight, option }) {
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
                   نوع هواپیما
                 </p>
-                <p className="text-[12px]">Airbus A320</p>
+                <p className="text-[12px]">
+                  {segment.operatingAirline.equipment}
+                </p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
                   بار مجاز
                 </p>
-                <p className="text-[12px]">۲۰ کیلوگرم</p>
+                <p className="text-[12px]">{segment.baggage}</p>
               </div>
             </div>
 
@@ -108,28 +162,30 @@ export default function Detail({ segment, flight, option }) {
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
                   کلاس پرواز
                 </p>
-                <p className="text-[12px]">اکونومی</p>
+                <p className="text-[12px]">
+                  {segment.cabinClassCode === "Y" ? "اکونومی" : "بیزینس"}
+                </p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[12px] text-[#8d8d8d] pt-1 md:pt-0">
                   کلاس نرخی
                 </p>
-                <p className="text-[12px]">A</p>
+                <p className="text-[12px]">{segment.cabinClassCode}</p>
               </div>
             </div>
 
             <div className="flex  md:flex-row flex-col  md:gap-10 mt-4">
               <div className="flex gap-4">
                 <p className="text-[14px] font-bold flex md:gap-4 mb-2 md:mb-0">
-                  ۱۲:۴۵ استانبول(IST)
+                  {formattedArrivalTime} استانبول (IST)
                 </p>
               </div>
               <div className="text-[#464646] text-[14px] flex md:gap-4 mb-2 md:mb-0">
-                <p>12 اردیبهشت 1399 (07 Apr)</p>
+                <p>{formattedArrival}</p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[#8d8d8d] text-[14px]">
-                  (Istanbul Airport Intl)
+                  {segment.arrivalAirportLocationCode}
                 </p>
               </div>
             </div>
@@ -137,22 +193,24 @@ export default function Detail({ segment, flight, option }) {
         </div>
 
         <div className="flex flex-col md:flex-row py-2 border md:border-none">
-          <div className="flex flex-row md:border px-10 py-2 justify-between">
-            <p className="text-[#464646] text-[14px]">بزرگسال</p>
-            <p className="text-[#464646] text-[14px]"> ۱۳۷۰۰۰۰ تومان</p>
+          <div className="flex flex-row md:border px-10 py-2">
+            <p className="text-[#464646] text-[14px] px-1">بزرگسال</p>
+            <p className="text-[#464646] text-[14px]"> ۱,۳۷۰,۰۰۰ تومان</p>
           </div>
           <div className="flex flex-row md:border justify-between px-10 py-2">
-            <p className="text-[#464646] text-[14px]">کودک</p>
-            <p className="text-[#464646] text-[14px]">۱۳۷۰۰۰۰ تومان</p>
+            <p className="text-[#464646] text-[14px] px-1">کودک</p>
+            <p className="text-[#464646] text-[14px]">۱,۳۷۰,۰۰۰ تومان</p>
           </div>
           <div className="flex flex-row md:border justify-between px-10 py-2">
-            <p className="text-[#464646] text-[14px]">نوزاد</p>
-            <p className="text-[#464646] text-[14px]">۱۳۷۰۰۰۰ تومان</p>
+            <p className="text-[#464646] text-[14px] px-1">نوزاد</p>
+            <p className="text-[#464646] text-[14px]">۱,۳۷۰,۰۰۰ تومان</p>
           </div>
           <div className="flex md:border justify-between px-10 py-2">
-            <p className="text-[#464646] font-bold text-[14px]">مجموع:</p>
+            <p className="text-[#464646] font-bold text-[14px] px-1">
+              مجموع :{" "}
+            </p>
             <p className="text-[#1773dc] font-bold text-[14px]">
-              ۱۳۷۰۰۰۰ تومان
+              ۱,۳۷۰,۰۰۰ تومان
             </p>
           </div>
         </div>

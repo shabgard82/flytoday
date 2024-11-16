@@ -22,6 +22,15 @@ function NewFlycard({ segment, flight, option }) {
 
   const duration = segment.journeyDuration;
 
+  function convertDurationToFarsi(duration) {
+    const [hours, minutes] = duration.split(":").map(Number);
+
+    const hoursText = hours > 0 ? `${hours} ساعت` : "";
+    const minutesText = minutes > 0 ? `${minutes} دقیقه` : "";
+
+    return [hoursText, minutesText].filter(Boolean).join(" و ");
+  }
+  const durationInFarsi = convertDurationToFarsi(duration);
 
   useEffect(() => {
     const departureTime = new Date(segment.departureDateTime);
@@ -52,8 +61,8 @@ function NewFlycard({ segment, flight, option }) {
   const formattedFare = totalFare.toLocaleString();
   return (
     <main
-  className="border-2 my-4 lg:w-[894px] w-full max-w-[894px] h-auto"
-  dir="rtl"
+      className="border-2 my-4 lg:w-[894px] w-full max-w-[894px] h-auto"
+      dir="rtl"
     >
       <section className="flex flex-col">
         <div className="lg:flex justify-between">
@@ -71,23 +80,28 @@ function NewFlycard({ segment, flight, option }) {
             <div className="flex flex-row items-center justify-around gap-2 py-2 px-2 md:px-4">
               <div className="flex flex-col items-center">
                 <h1 className="text-[#464646] font-bold text-[24px]" dir="rtl">
-                  {formattedArrivalTime}
+                  {formattedDepartureTime}
                 </h1>
               </div>
+
               <div className="flex flex-col items-center">
-                <p className="text-[#6f6f6f] text-[12px] dir-rtl">{duration}</p>
+                <p className="text-[#6f6f6f] text-[12px] dir-rtl">
+                  {durationInFarsi}
+                </p>
                 <div className="flex flex-row items-center">
                   <div className="w-3 h-3 border border-[#ff7913] rounded-full"></div>
                   <div className="w-[86px] md:w-[147px] h-[1px] bg-[#c6c6c6]"></div>
                   <div className="w-3 h-3 border border-[#1773dc] rounded-full"></div>
                 </div>
               </div>
+
               <div className="flex flex-col items-center">
                 <h1 className="text-[#464646] font-bold text-[24px]" dir="rtl">
-                  {formattedDepartureTime}
+                  {formattedArrivalTime}
                 </h1>
               </div>
             </div>
+
             <div className="md:flex md:items-center md:justify-between md:px-4 hidden">
               <p className="text-[#8d8d8d] text-[14px]">
                 تهران<span className="text-[#8d8d8d] text-[14px]">(THR)</span>
@@ -136,7 +150,7 @@ function NewFlycard({ segment, flight, option }) {
             <div className="md:py-2 py-4">
               <hr className="md:hidden" />
               <div className="lg:hidden flex justify-between items-center">
-                <div className="flex flex-row justify-around gap-1 py-1">
+                <div className="flex flex-row justify-around items-center gap-1 py-1">
                   <p className="text-xs text-[#464646] border-2 border-[#f4f4f4] py-1 px-3">
                     {isCharter ? "چارتر" : "سیستمی"}
                   </p>
@@ -172,7 +186,7 @@ function NewFlycard({ segment, flight, option }) {
         <div className="lg:block hidden">
           <div className="flex justify-between items-center px-5 border-t-2">
             <div className="flex flex-row gap-1 py-3">
-              <p className="text-xs text-[#464646] border-2 border-[#f4f4f4] py-1 px-3">
+              <p className="text-xs text-[#464646] border-2 border-[#f4f4f4] py-1 px-1">
                 {isCharter ? "چارتر" : "سیستمی"}
               </p>
               <p className="text-xs text-[#464646] py-1 px-1">
@@ -201,11 +215,25 @@ function NewFlycard({ segment, flight, option }) {
             </div>
           </div>
           {openDetail ? (
-            <Detail segment={segment} flight={flight} option={option} />
+            <Detail
+              segment={segment}
+              flight={flight}
+              option={option}
+              durationInFarsi={durationInFarsi}
+              formattedArrivalTime={formattedArrivalTime}
+              formattedDepartureTime={formattedDepartureTime}
+            />
           ) : null}
         </div>
         <Drawer isOpen={openDrawer} toggleDrawer={handleDrawer}>
-          <Detail segment={segment} flight={flight} option={option} />
+          <Detail
+            segment={segment}
+            flight={flight}
+            option={option}
+            durationInFarsi={durationInFarsi}
+            formattedArrivalTime={formattedArrivalTime}
+            formattedDepartureTime={formattedDepartureTime}
+          />
         </Drawer>
       </section>
     </main>

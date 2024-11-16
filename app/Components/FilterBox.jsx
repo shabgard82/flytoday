@@ -25,7 +25,7 @@ export default function FilterBox({ filters, setFilters }) {
 
   
   return (
-    <div className="md:w-full md:max-w-[282px] md:border md:justify-start ">
+    <div className="md:w-full md:max-w-[282px] md:border md:justify-start h-auto">
       <div className="flex justify-between items-center px-4 py-4">
         <p className="text-[13px] text-[#1773dc]">حذف فیلترها</p>
         <p className="text-[#464646] font-bold text-[14px]">فیلترها</p>
@@ -70,7 +70,7 @@ export default function FilterBox({ filters, setFilters }) {
           </label>
         </div>
       ) : null}
-      <div className="border-t px-2 py-2">
+      <div className="border-t border-b px-2 py-2">
         <div className="flex items-center justify-between">
           {openFilterClass ? (
             <ArrowUp2 size="18" color="#8d8d8d" onClick={handleFilterClass} />
