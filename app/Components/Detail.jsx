@@ -4,7 +4,6 @@ import Image from "next/image";
 export default function Detail({
   segment,
   flight,
-  option,
   durationInFarsi,
   formattedArrivalTime,
   formattedDepartureTime,
@@ -207,7 +206,7 @@ export default function Detail({
           </div>
           <div className="flex md:border justify-between px-10 py-2">
             <p className="text-[#464646] font-bold text-[14px] px-1">
-              مجموع :{" "}
+              مجموع :
             </p>
             <p className="text-[#1773dc] font-bold text-[14px]">
               ۱,۳۷۰,۰۰۰ تومان

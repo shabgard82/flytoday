@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import { pricedItineraries } from "../data/db";
 import { ArrowDown2, ArrowUp2 } from "iconsax-react";
 
-export default function FilterBox({ filters, setFilters }) {
+export default function FilterBox({ filters, setFilters, handleRemoveFilter }) {
   const [openFilter, setOpenFilter] = useState(true);
   const [openFilterClass, setOpenFilterClass] = useState(true);
 
@@ -23,11 +22,15 @@ export default function FilterBox({ filters, setFilters }) {
     }));
   };
 
-  
   return (
     <div className="md:w-full md:max-w-[282px] md:border md:justify-start h-auto">
       <div className="flex justify-between items-center px-4 py-4">
-        <p className="text-[13px] text-[#1773dc]">حذف فیلترها</p>
+        <p
+          className="text-[13px] text-[#1773dc] cursor-pointer"
+          onClick={handleRemoveFilter}
+        >
+          حذف فیلترها
+        </p>
         <p className="text-[#464646] font-bold text-[14px]">فیلترها</p>
       </div>
       <div className="border-t px-2 py-2">

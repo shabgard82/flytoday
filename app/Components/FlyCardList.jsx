@@ -16,6 +16,15 @@ export default function FlyCardList() {
     business: false,
   });
 
+  const handleRemoveFilter = () => {
+    setFilters({
+      charter: false,
+      system: false,
+      economy: false,
+      business: false,
+    });
+  };
+
   const handleSortChange = (e) => {
     const selectedCriteria = e.target.value;
     setSortCriteria(selectedCriteria);
@@ -58,10 +67,10 @@ export default function FlyCardList() {
   return (
     <div className="flex justify-center gap-10">
       <div>
-        {/* <FlySort
+        <FlySort
           handleSortChange={handleSortChange}
           sortCriteria={sortCriteria}
-        /> */}
+        />
         {filteredItineraries.map((flight) => {
           return flight.originDestinationOptions.map((option) => {
             return option.flightSegments.map((segment) => {
@@ -77,7 +86,11 @@ export default function FlyCardList() {
           });
         })}
       </div>
-      {/* <FilterBox filters={filters} setFilters={setFilters} /> */}
+      <FilterBox
+        filters={filters}
+        setFilters={setFilters}
+        handleRemoveFilter={handleRemoveFilter}
+      />
     </div>
   );
 }

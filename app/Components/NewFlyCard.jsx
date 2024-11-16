@@ -61,7 +61,7 @@ function NewFlycard({ segment, flight, option }) {
   const formattedFare = totalFare.toLocaleString();
   return (
     <main
-      className="border-2 my-4 lg:w-[894px] w-full max-w-[894px] h-auto"
+      className="border-2 my-2 lg:w-[894px] w-full max-w-[894px] h-auto"
       dir="rtl"
     >
       <section className="flex flex-col">
