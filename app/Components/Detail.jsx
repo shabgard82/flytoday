@@ -89,8 +89,16 @@ export default function Detail({
 
           <div className="flex flex-col items-center">
             <div className="w-2 h-2 border border-[#870b1d] rounded-full my-2"></div>
-            <div className="flex flex-col items-center gap-2 md:h-[112px] h-[307px]">
+            <div className="md:flex md:flex-col md:items-center md:gap-2 md:h-[112px] hidden">
               {[...Array(10)].map((_, index) => (
+                <div
+                  key={index}
+                  className="w-1 h-1 bg-[#c6c6c6] rounded-full"
+                ></div>
+              ))}
+            </div>
+            <div className="flex flex-col items-center gap-2 h-[300px] md:hidden">
+              {[...Array(26)].map((_, index) => (
                 <div
                   key={index}
                   className="w-1 h-1 bg-[#c6c6c6] rounded-full"
@@ -192,7 +200,7 @@ export default function Detail({
         </div>
 
         <div className="flex flex-col md:flex-row py-2 border md:border-none">
-          <div className="flex flex-row md:border px-10 py-2">
+          <div className="flex flex-row md:border justify-between px-10 py-2">
             <p className="text-[#464646] text-[14px] px-1">بزرگسال</p>
             <p className="text-[#464646] text-[14px]"> ۱,۳۷۰,۰۰۰ تومان</p>
           </div>
@@ -205,9 +213,7 @@ export default function Detail({
             <p className="text-[#464646] text-[14px]">۱,۳۷۰,۰۰۰ تومان</p>
           </div>
           <div className="flex md:border justify-between px-10 py-2">
-            <p className="text-[#464646] font-bold text-[14px] px-1">
-              مجموع :
-            </p>
+            <p className="text-[#464646] font-bold text-[14px] px-1">مجموع :</p>
             <p className="text-[#1773dc] font-bold text-[14px]">
               ۱,۳۷۰,۰۰۰ تومان
             </p>
