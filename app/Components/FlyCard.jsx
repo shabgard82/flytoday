@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 import UseWindowSize from "./useWindowSize";
@@ -24,6 +23,16 @@ export default function FlyCard({ segment, flight, option }) {
   const departureTime = new Date(segment.departureDateTime);
   const arrivalTime = new Date(segment.arrivalDateTime);
   const duration = segment.journeyDuration;
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+
+  const formattedDepartureTime = departureTime.toLocaleTimeString(
+    "en-US",
+    options
+  );
+  const formattedArrivalTime = arrivalTime.toLocaleTimeString("en-US", options);
 
   const totalFare =
     flight.airItineraryPricingInfo.itinTotalFare.grandTotalWithoutDiscount;
@@ -51,7 +60,7 @@ export default function FlyCard({ segment, flight, option }) {
             <div className="flex flex-row items-center justify-around">
               <div>
                 <h1 className="text-[#464646] font-bold text-[24px]">
-                  {arrivalTime.toLocaleTimeString()}
+                  {formattedArrivalTime}
                 </h1>
               </div>
 
@@ -68,7 +77,7 @@ export default function FlyCard({ segment, flight, option }) {
 
               <div>
                 <h1 className="text-[#464646] font-bold text-[24px]">
-                  {departureTime.toLocaleTimeString()}
+                  {formattedDepartureTime}
                 </h1>
               </div>
             </div>
@@ -120,7 +129,7 @@ export default function FlyCard({ segment, flight, option }) {
             </div>
           </div>
         ) : (
-          <div className="border-2 my-10 mx-10 max-w-[894px]">
+          <div className="border-2 my-4 max-w-[894px]">
             <div className="flex flex-row w-full justify-between">
               <div className=" flex flex-row px-2">
                 <div className="flex flex-col items-center justify-around pt-2">
@@ -142,10 +151,10 @@ export default function FlyCard({ segment, flight, option }) {
                 <div className="w-[1px] h-[120px] bg-[#eeeeee] mx-4"></div>
               </div>
 
-              <div className="flex flex-row items-center justify-around gap-10">
+              <div className="flex flex-row items-center justify-around gap-10 px-10">
                 <div>
                   <h1 className="text-[#464646] font-bold text-[24px]">
-                    {arrivalTime.toLocaleTimeString()}
+                    {formattedArrivalTime}
                   </h1>
                 </div>
 
@@ -162,7 +171,7 @@ export default function FlyCard({ segment, flight, option }) {
 
                 <div>
                   <h1 className="text-[#464646] font-bold text-[24px]">
-                    {departureTime.toLocaleTimeString()}
+                    {formattedDepartureTime}
                   </h1>
                 </div>
               </div>

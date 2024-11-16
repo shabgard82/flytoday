@@ -1,14 +1,20 @@
 "use client";
 import { useState } from "react";
 import { pricedItineraries } from "../data/db";
-//COMPONENTS
 import FlyCard from "./FlyCard";
 import FlySort from "./FlySort";
 import FilterBox from "./FilterBox";
+import NewFlycard from "./NewFlyCard";
 
 export default function FlyCardList() {
   const [sortedItineraries, setSortedItineraries] = useState(pricedItineraries);
   const [sortCriteria, setSortCriteria] = useState("قیمت");
+  const [filters, setFilters] = useState({
+    charter: false,
+    system: false,
+    economy: false,
+    business: false,
+  });
 
   const handleSortChange = (e) => {
     const selectedCriteria = e.target.value;
@@ -31,19 +37,36 @@ export default function FlyCardList() {
 
     setSortedItineraries(sortedData);
   };
+  const filteredItineraries = sortedItineraries.filter((flight) => {
+    const matchesCharter = filters.charter ? flight.isCharter : true;
+    const matchesSystem = filters.system ? flight.isSystem : true;
+
+    const matchesCabinClass =
+      filters.economy || filters.business
+        ? flight.originDestinationOptions.some((option) =>
+            option.flightSegments.some(
+              (segment) =>
+                (filters.economy && segment.cabinClassCode === "Y") ||
+                (filters.business && segment.cabinClassCode === "C")
+            )
+          )
+        : true;
+
+    return matchesCharter && matchesSystem && matchesCabinClass;
+  });
 
   return (
-    <div className="flex items-center">
+    <div className="flex justify-center gap-10">
       <div>
         <FlySort
           handleSortChange={handleSortChange}
           sortCriteria={sortCriteria}
         />
-        {sortedItineraries.map((flight) => {
+        {filteredItineraries.map((flight) => {
           return flight.originDestinationOptions.map((option) => {
             return option.flightSegments.map((segment) => {
               return (
-                <FlyCard
+                <NewFlycard
                   key={segment.flightNumber}
                   segment={segment}
                   flight={flight}
@@ -54,7 +77,7 @@ export default function FlyCardList() {
           });
         })}
       </div>
-      <FilterBox />
+      <FilterBox filters={filters} setFilters={setFilters} />
     </div>
   );
 }

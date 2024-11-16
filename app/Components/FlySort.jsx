@@ -1,6 +1,6 @@
 export default function FlySort({ sortCriteria, handleSortChange }) {
   return (
-    <div className="max-w-[894px] md:mx-10">
+    <div className="max-w-[894px]">
       <div className="flex justify-between items-center">
         <div className="flex justify-center items-center">
           <select
