@@ -35,16 +35,21 @@ export default function FlyCardList() {
           b.airItineraryPricingInfo.itinTotalFare.totalFare
         );
       } else if (selectedCriteria === "زمان") {
-        return (
-          a.originDestinationOptions[0].journeyDurationPerMinute -
-          b.originDestinationOptions[0].journeyDurationPerMinute
+        const departureA = new Date(
+          a.originDestinationOptions[0].flightSegments[0].departureDateTime
         );
+        const departureB = new Date(
+          b.originDestinationOptions[0].flightSegments[0].departureDateTime
+        );
+
+        return departureA - departureB;
       }
       return 0;
     });
 
     setSortedItineraries(sortedData);
   };
+
   const filteredItineraries = sortedItineraries.filter((flight) => {
     const matchesCharter = filters.charter ? flight.isCharter : true;
     const matchesSystem = filters.system ? flight.isSystem : true;
@@ -66,10 +71,12 @@ export default function FlyCardList() {
   return (
     <div className="flex justify-center gap-10">
       <div className="flex-2">
-        <FlySort
-          handleSortChange={handleSortChange}
-          sortCriteria={sortCriteria}
-        />
+        <div className="hidden md:block">
+          <FlySort
+            handleSortChange={handleSortChange}
+            sortCriteria={sortCriteria}
+          />
+        </div>
         {filteredItineraries.map((flight) => {
           return flight.originDestinationOptions.map((option) => {
             return option.flightSegments.map((segment) => {
